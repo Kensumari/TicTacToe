@@ -22,6 +22,9 @@ namespace TicTacToe
             if (l.Contains(1) && l.Contains(2) && l.Contains(3) ||
                 l.Contains(4) && l.Contains(5) && l.Contains(6) ||
                 l.Contains(7) && l.Contains(8) && l.Contains(9) ||
+                l.Contains(1) && l.Contains(4) && l.Contains(7) ||
+                l.Contains(2) && l.Contains(5) && l.Contains(8) ||
+                l.Contains(3) && l.Contains(6) && l.Contains(9) ||
                 l.Contains(1) && l.Contains(5) && l.Contains(9) ||
                 l.Contains(3) && l.Contains(5) && l.Contains(7))
             {
