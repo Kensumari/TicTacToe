@@ -8,8 +8,16 @@ namespace TicTacToe
 {
     class End
     {
-        public bool gameOver = false;
-        public void winCondition(List<int> l)
+        private string name1;
+        private string name2;
+        public bool SetPlayer { get; set; }
+        public End(string name1,string name2)
+        {
+            this.name1 = name1;
+            this.name2 = name2;
+        }
+        public bool GameOver = false;
+        public void WinCondition(List<int> l)
         {
             if (l.Contains(1) && l.Contains(2) && l.Contains(3) ||
                 l.Contains(4) && l.Contains(5) && l.Contains(6) ||
@@ -17,16 +25,21 @@ namespace TicTacToe
                 l.Contains(1) && l.Contains(5) && l.Contains(9) ||
                 l.Contains(3) && l.Contains(5) && l.Contains(7))
             {
-                gameOver = true;
+                GameOver = true;
+                if (SetPlayer == false)
+                {
+                    Console.WriteLine("Congratulations to " + name1);
+                }
+                if (SetPlayer == true)
+                {
+                    Console.WriteLine("Congratulations to " + name2);
+                }
             }
         }
-        public void tieCondition(List<int> l)
+        public void TieCondition()
         {
-            if (l.Count == 9)
-            {
-                gameOver = true;
+                GameOver = true;
                 Console.WriteLine("It was a tie, well fought!");
-            }
         }
     }
 }

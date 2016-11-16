@@ -8,11 +8,39 @@ namespace TicTacToe
 {
     class Board
     {
+        public char P1sym = 'X';
+        public char P2sym = 'O';
         Player player = new Player();
-        End end = new End();
-        int j = 0;
+        End end;
+        int j ;
         //setPlayer puts the player 1 = false and player 2 = true
-        public bool setPlayer = false;
+
+        static string p1 = "Player 1";
+        static string p2 = "Player 2";
+
+
+        public Board(string name,string name2)
+        {
+            end = new End(name, name2);
+        }
+
+        static void Main(string[] args)
+        {
+            
+            Console.WriteLine("Welcome to TicTacToe, Please type in the 2 following players names.");
+            p1 = Console.ReadLine();
+            p2 = Console.ReadLine();
+            var board = new Board(p1,p2);
+            Console.WriteLine("Player 1's name is " + p1);
+            Console.WriteLine("Player 2's name is " + p2);
+            Console.WriteLine("Thank you, I will now instruct you how to play the game");
+            board.initiateBoard();
+            Console.WriteLine("You can only type in between number 1-9 as you see on the screen, may the best player win");
+            board.runGame();
+
+            Console.ReadLine();
+        }
+
         public void initiateBoard()
         {
             for (int i = 1; i < 10; i++)
@@ -26,17 +54,17 @@ namespace TicTacToe
         }
         public void runGame()
         {
-            while (end.gameOver == false)
+            while (end.GameOver == false)
             {
                 // switching between 
                 if (j % 2 == 0)
                 {
-                    setPlayer = false;
+                    end.SetPlayer = false;
                     player.P1();
                 }
                 else
                 {
-                    setPlayer = true;
+                    end.SetPlayer = true;
                     player.P2();
                 }
 
@@ -45,14 +73,14 @@ namespace TicTacToe
                 for (int i = 1; i < 10; i++)
                 {
 
-                    if (player.p1List.Contains(i))
+                    if (player.P1List.Contains(i))
                     {
 
-                        Console.Write(player.p1sym);
+                        Console.Write(P1sym);
                     }
-                    else if (player.p2List.Contains(i))
+                    else if (player.P2List.Contains(i))
                     {
-                        Console.Write(player.p2sym);
+                        Console.Write(P2sym);
                     }
                     else
                     {
@@ -63,16 +91,19 @@ namespace TicTacToe
                         Console.WriteLine("");
                     }
                 }
-                if (setPlayer == false)
+                if (end.SetPlayer == false)
                 {
-                    end.winCondition(player.p1List);
+                    end.WinCondition(player.P1List);
                 }
                 else
                 {
-                    end.winCondition(player.p2List);
+                    end.WinCondition(player.P2List);
                 }
-                end.tieCondition(player.totalList);
                 j++;
+                if (j == 9 && end.GameOver == false)
+                {
+                    end.TieCondition();
+                }
             }            
         }
     }
